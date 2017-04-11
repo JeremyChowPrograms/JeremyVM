@@ -39,7 +39,7 @@ void JeremyVM::run(){
             Stack.pop();
             break;
         case CALL:
-            reta = ip+1;
+            reta.push(ip+1);
             ip = code[ip];
             break;
         case IADD:
@@ -81,7 +81,7 @@ void JeremyVM::run(){
             break;
         case JE:
             if(tof){
-                reta = ip +1;
+                reta.push(ip+1);
                 ip = code[ip];
             }else{
                 ip++;
@@ -89,7 +89,7 @@ void JeremyVM::run(){
             break;
         case JNE:
             if(!tof){
-                reta = ip +1;
+                reta.push(ip+1);
                 ip = code[ip];
             }else{
                 ip++;
@@ -108,13 +108,8 @@ void JeremyVM::run(){
             Memory.push(t1);
             break;
         case RET:
-            ip = reta;
-            reta = -1;
-            break;
-        case JMP:
-            
-            reta = ip +1;
-            ip = code[ip];
+            ip = reta.top();
+            reta.pop();
             break;
         default:
             break;

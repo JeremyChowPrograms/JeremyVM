@@ -31,14 +31,14 @@ const X32 CMP = 12;
 const X32 JNE = 13;
 const X32 JE = 14;
 const X32 MSTORE = 15;
-const X32 JMP = 16;
 
 
 class JeremyVM{
     int ip=0;
-    int reta=-1;
+    std::stack<X32> reta;
     std::stack<X32> Memory;
     std::stack<X32> Stack;
+    
     X32 *code;
     bool tof = false;
     int codesize;
